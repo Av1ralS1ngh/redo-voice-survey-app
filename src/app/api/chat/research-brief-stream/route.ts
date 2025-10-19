@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import OpenAI from "openai";
 import { getAgentByType } from "@/lib/interview-types/registry";
 import { INTERVIEW_GUIDE_SYSTEM_PROMPT } from "@/lib/interview-types/agents/interview-guide-agent";
+import { performAssistantAnalysis } from "@/lib/assistant-analysis";
 
 // Force dynamic rendering and disable buffering
 export const runtime = 'nodejs';
@@ -156,11 +157,6 @@ export async function POST(req: NextRequest) {
       },
     ];
 
-    const envBaseUrl =
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      process.env.NEXT_PUBLIC_APP_URL ||
-      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
-
     // Create a streaming response
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
@@ -281,44 +277,20 @@ export async function POST(req: NextRequest) {
                   .map((msg: ChatMessage) => msg.content)
                   .join('\n') || `${projectName}${projectDescription ? ': ' + projectDescription : ''}`;
                 
-                const derivedBaseUrl =
-                  envBaseUrl ||
-                  req.nextUrl?.origin ||
-                  (() => {
-                    const proto = req.headers.get('x-forwarded-proto') ?? 'https';
-                    const host = req.headers.get('host');
-                    return host ? `${proto}://${host}` : undefined;
-                  })();
-
-                if (!derivedBaseUrl) {
-                  throw new Error('Unable to determine base URL for assistant analysis');
-                }
-
-                const analysisUrl = new URL('/api/chat/assistant-analysis', derivedBaseUrl);
-
-                // Call assistant analysis
-                const analysisResponse = await fetch(analysisUrl.toString(), {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    userPrompt,
-                    generatedContent: finalContent,
-                    contentType: currentView === 'guide' ? 'guide' : 'brief',
-                    interviewType: interviewType || 'custom',
-                    metadata,
-                  }),
+                // Call assistant analysis directly (avoids base URL env mismatch)
+                const analysis = await performAssistantAnalysis({
+                  userPrompt,
+                  generatedContent: finalContent,
+                  contentType: currentView === 'guide' ? 'guide' : 'brief',
+                  interviewType: interviewType || 'custom',
+                  metadata,
                 });
-                
-                if (analysisResponse.ok) {
-                  const analysis = await analysisResponse.json();
-                  finalMessage = analysis.intelligentMessage;
-                  console.log('✅ [API] Assistant analysis completed:', {
-                    messageLength: finalMessage.length,
-                    hasSuggestions: analysis.suggestions?.length > 0,
-                  });
-                } else {
-                  throw new Error('Analysis request failed');
-                }
+
+                finalMessage = analysis.intelligentMessage;
+                console.log('✅ [API] Assistant analysis completed:', {
+                  messageLength: finalMessage.length,
+                  hasSuggestions: analysis.suggestions?.length > 0,
+                });
               } catch (analysisError) {
                 console.error('⚠️ [API] Assistant analysis failed, using fallback:', analysisError);
                 
