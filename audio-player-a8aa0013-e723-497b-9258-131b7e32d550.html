@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversation Audio Player</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .info { background: #e8f4fd; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        audio { width: 100%; margin: 20px 0; }
+        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+        .stat { background: #f8f9fa; padding: 10px; border-radius: 5px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Conversation Audio Player</h1>
+        
+        <div class="info">
+            <strong>Chat ID:</strong> a8aa0013-e723-497b-9258-131b7e32d550<br>
+            <strong>File:</strong> test-conversation-audio-a8aa0013-e723-497b-9258-131b7e32d550.mp4<br>
+            <strong>Status:</strong> COMPLETE<br>
+            <strong>Size:</strong> 2383.0 KB
+        </div>
+        
+        <audio controls>
+            <source src="test-conversation-audio-a8aa0013-e723-497b-9258-131b7e32d550.mp4" type="audio/mp4">
+            Your browser does not support the audio element.
+        </audio>
+        
+        <div class="stats">
+            <div class="stat">
+                <strong>Format</strong><br>
+                MP4 Audio
+            </div>
+            <div class="stat">
+                <strong>Source</strong><br>
+                Hume EVI
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: #666; margin-top: 30px;">
+            🎯 This audio was reconstructed from Hume's conversation data using their Audio Reconstruction API.
+        </p>
+    </div>
+</body>
+</html>

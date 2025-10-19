@@ -1,0 +1,267 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #171717;
+  --muted-foreground: #6b7280;
+  --page-bg: linear-gradient(to bottom right, #f8fafc, #e0f2fe, #fef3c7);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --button-bg: #717171;
+  --button-hover-bg: #a1a1a1;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #0a0a0a;
+  --foreground: #f4f4f5;
+  --muted-foreground: #9ca3af;
+  --page-bg: linear-gradient(to bottom right, #0f172a, #111827, #1f2937);
+  --card-bg: rgba(30, 41, 59, 0.9);
+  --card-border: rgba(148, 163, 184, 0.25);
+  --button-bg: #e5e7eb;
+  --button-hover-bg: #d1d5db;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background 0.4s ease, color 0.2s ease;
+}
+
+@layer base {
+  .dark body {
+    background: var(--page-bg);
+    color: var(--foreground);
+  }
+
+  .dark .bg-white,
+  .dark .bg-slate-50,
+  .dark .bg-gray-50,
+  .dark .bg-neutral-50 {
+    background-color: var(--card-bg) !important;
+  }
+
+  .dark .bg-gray-100,
+  .dark .bg-slate-100,
+  .dark .bg-neutral-100 {
+    background-color: color-mix(in srgb, var(--card-bg) 85%, transparent) !important;
+  }
+
+  .dark .bg-gray-200,
+  .dark .bg-slate-200,
+  .dark .bg-neutral-200 {
+    background-color: color-mix(in srgb, var(--card-bg) 75%, transparent) !important;
+  }
+
+  .dark .bg-white\/95 {
+    background-color: color-mix(in srgb, var(--card-bg) 95%, transparent) !important;
+  }
+
+  .dark .bg-white\/90 {
+    background-color: color-mix(in srgb, var(--card-bg) 90%, transparent) !important;
+  }
+
+  .dark .bg-white\/80 {
+    background-color: color-mix(in srgb, var(--card-bg) 80%, transparent) !important;
+  }
+
+  .dark .bg-white\/70 {
+    background-color: color-mix(in srgb, var(--card-bg) 70%, transparent) !important;
+  }
+
+  .dark .bg-white\/60 {
+    background-color: color-mix(in srgb, var(--card-bg) 60%, transparent) !important;
+  }
+
+  .dark .bg-white\/50 {
+    background-color: color-mix(in srgb, var(--card-bg) 50%, transparent) !important;
+  }
+
+  .dark .bg-white\/40 {
+    background-color: color-mix(in srgb, var(--card-bg) 40%, transparent) !important;
+  }
+
+  .dark .bg-white\/30 {
+    background-color: color-mix(in srgb, var(--card-bg) 30%, transparent) !important;
+  }
+
+  .dark .bg-white\/20 {
+    background-color: color-mix(in srgb, var(--card-bg) 20%, transparent) !important;
+  }
+
+  .dark .bg-white\/10 {
+    background-color: color-mix(in srgb, var(--card-bg) 10%, transparent) !important;
+  }
+
+  .dark .backdrop-blur-md,
+  .dark .backdrop-blur-lg,
+  .dark .backdrop-blur-sm {
+    background-color: color-mix(in srgb, var(--card-bg) 85%, transparent) !important;
+  }
+
+  .dark .border-gray-100,
+  .dark .border-gray-200,
+  .dark .border-gray-300,
+  .dark .border-slate-100,
+  .dark .border-slate-200,
+  .dark .border-white\/60,
+  .dark .border-white\/50,
+  .dark .border-white\/40,
+  .dark .border-white\/20,
+  .dark .border-neutral-200 {
+    border-color: var(--card-border) !important;
+  }
+
+  .dark .text-gray-900,
+  .dark .text-gray-800,
+  .dark .text-gray-700,
+  .dark .text-slate-900,
+  .dark .text-slate-800,
+  .dark .text-slate-700,
+  .dark .text-neutral-900 {
+    color: var(--foreground) !important;
+  }
+
+  .dark .text-gray-600,
+  .dark .text-gray-500,
+  .dark .text-gray-400,
+  .dark .text-gray-300,
+  .dark .text-slate-600,
+  .dark .text-slate-500,
+  .dark .text-slate-400,
+  .dark .text-slate-300,
+  .dark .text-neutral-600,
+  .dark .text-neutral-500 {
+    color: var(--muted-foreground) !important;
+  }
+
+  .dark .placeholder-gray-500::placeholder,
+  .dark .placeholder-gray-400::placeholder,
+  .dark .placeholder-slate-500::placeholder {
+    color: color-mix(in srgb, var(--muted-foreground) 70%, transparent) !important;
+  }
+
+  .dark .shadow-sm,
+  .dark .shadow,
+  .dark .shadow-md,
+  .dark .shadow-lg,
+  .dark .shadow-xl,
+  .dark .shadow-2xl {
+    box-shadow: 0 20px 45px rgba(2, 6, 23, 0.55) !important;
+  }
+
+  .dark .ring-slate-200,
+  .dark .ring-gray-200,
+  .dark .ring-white\/60 {
+    --tw-ring-color: color-mix(in srgb, var(--card-border) 80%, transparent);
+  }
+
+  .dark .hover\:bg-gray-50:hover,
+  .dark .hover\:bg-slate-50:hover,
+  .dark .hover\:bg-gray-100:hover,
+  .dark .hover\:bg-white:hover {
+    background-color: color-mix(in srgb, var(--card-bg) 70%, transparent) !important;
+  }
+
+  .dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--card-border);
+  }
+
+  .bg-surface {
+    background-color: var(--card-bg);
+  }
+
+  .surface-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+  }
+
+  .border-surface {
+    border-color: var(--card-border);
+  }
+
+  .text-muted {
+    color: var(--muted-foreground);
+  }
+
+  .wizard-typography {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--foreground);
+    line-height: 1.6;
+  }
+
+  .wizard-typography h1,
+  .wizard-typography h2,
+  .wizard-typography h3,
+  .wizard-typography h4,
+  .wizard-typography h5,
+  .wizard-typography h6 {
+    color: var(--foreground);
+    font-family: inherit;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .wizard-typography p,
+  .wizard-typography span,
+  .wizard-typography label,
+  .wizard-typography input,
+  .wizard-typography textarea,
+  .wizard-typography li,
+  .wizard-typography button {
+    color: inherit;
+    font-family: inherit;
+  }
+
+  .wizard-typography .text-muted,
+  .wizard-typography .muted-text,
+  .wizard-typography .subtle-text {
+    color: var(--muted-foreground);
+  }
+
+  .wizard-typography .text-gray-900,
+  .wizard-typography .text-gray-800,
+  .wizard-typography .text-gray-700,
+  .wizard-typography .text-slate-900,
+  .wizard-typography .text-slate-800,
+  .wizard-typography .text-slate-700 {
+    color: var(--foreground) !important;
+  }
+
+  .wizard-typography .text-gray-600,
+  .wizard-typography .text-gray-500,
+  .wizard-typography .text-gray-400,
+  .wizard-typography .text-slate-600,
+  .wizard-typography .text-slate-500,
+  .wizard-typography .text-slate-400 {
+    color: var(--muted-foreground) !important;
+  }
+}
+
+/* Animation for section fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Group hover support */
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
